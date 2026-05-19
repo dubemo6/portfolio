@@ -1,0 +1,235 @@
+/* ============================================
+   App.css — Shared Utility & Component Styles
+   Anthony Oguamanam Portfolio
+   ============================================ */
+
+/* ── Layout helpers ── */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section {
+  padding: 6rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section--dark {
+  padding: 6rem 2rem;
+  background: var(--color-dark);
+  color: #fff;
+}
+
+.section--tinted {
+  padding: 6rem 2rem;
+  background: var(--color-bg-alt);
+}
+
+.two-col {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+/* ── Typography utilities ── */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 3rem;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* ── Navigation ── */
+.nav-link {
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #555;
+  transition: color var(--transition-fast);
+  padding: 4px 0;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: var(--color-dark);
+}
+
+.nav-link.active {
+  color: var(--color-dark);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-dark);
+  border-radius: var(--radius-pill);
+}
+
+/* ── Buttons ── */
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  border: none;
+  text-decoration: none;
+}
+
+.pill-btn--dark {
+  background: var(--color-dark);
+  color: #fff;
+}
+
+.pill-btn--dark:hover {
+  background: #333;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.pill-btn--outline {
+  background: transparent;
+  color: var(--color-dark);
+  border: 1.5px solid #ccc;
+}
+
+.pill-btn--outline:hover {
+  border-color: var(--color-dark);
+  transform: translateY(-2px);
+}
+
+/* ── Cards ── */
+.card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+}
+
+.card--accent-bar {
+  position: relative;
+  overflow: hidden;
+}
+
+.card--accent-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+/* ── Tag / Pill labels ── */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.tag--dark {
+  background: var(--color-dark);
+  color: #fff;
+}
+
+.tag--muted {
+  background: #f0f0f0;
+  color: #555;
+  font-family: var(--font-mono);
+}
+
+/* ── Contact links ── */
+.contact-link {
+  color: var(--color-dark);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1.5px solid #ccc;
+  padding-bottom: 1px;
+  transition: border-color var(--transition-fast);
+}
+
+.contact-link:hover {
+  border-color: var(--color-dark);
+}
+
+/* ── Skill bar ── */
+.skill-bar-track {
+  height: 6px;
+  background: #e5e5e5;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.skill-bar-fill {
+  height: 100%;
+  background: var(--color-dark);
+  border-radius: var(--radius-pill);
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Responsive: mobile nav ── */
+@media (max-width: 700px) {
+  .nav-desktop {
+    display: none !important;
+  }
+
+  .hamburger {
+    display: flex !important;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .two-col {
+    flex-direction: column;
+  }
+
+  .hero-name {
+    font-size: 3rem !important;
+  }
+}
+
+@media (min-width: 701px) {
+  .hamburger {
+    display: none !important;
+  }
+
+  .mobile-menu {
+    display: none !important;
+  }
+}
