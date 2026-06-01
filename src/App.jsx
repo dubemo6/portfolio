@@ -186,25 +186,41 @@ export default function Portfolio() {
         .nav-link { cursor: pointer; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: #6b7280; transition: color 0.15s; }
         .nav-link:hover, .nav-link.active { color: #111827; }
         
-        .btn-flat { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 24px; border-radius: 6px; font-weight: 500; font-size: 0.85rem; cursor: pointer; transition: all 0.15s ease; border: none; font-family: inherit; }
+        .btn-flat { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 24px; border-radius: 6px; font-weight: 500; font-size: 0.85rem; cursor: pointer; transition: all 0.15s ease; border: none; font-family: inherit; text-decoration: none; text-align: center; }
         .btn-flat-dark { background: #111827; color: #ffffff; }
         .btn-flat-dark:hover { background: #1f2937; }
         .btn-flat-dark:disabled { background: #9ca3af; cursor: not-allowed; }
         .btn-flat-outline { background: transparent; color: #374151; border: 1px solid #d1d5db; }
         .btn-flat-outline:hover { background: #f9fafb; border-color: #111827; }
         
-        .section-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #9ca3af; margin-bottom: 0.75rem; fontFamily: var(--font-mono); }
+        .section-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #9ca3af; margin-bottom: 0.75rem; font-family: var(--font-mono); }
         .cf-input:focus { border-color: #111827 !important; }
         
         .project-card:hover { transform: translateY(-4px) !important; border-color: #9ca3af !important; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); }
 
+        /* --- STABLE RESPONSIVE LAYOUT MATRIX --- */
+        .grid-experience { display: grid; grid-template-columns: 1.6fr 1fr; gap: 2.5rem; }
+        .grid-skills { display: grid; grid-template-columns: 1.3fr 1fr; gap: 4rem; }
+        .grid-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 4rem; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+        .hero-name { font-weight: 700; font-size: 4rem; lineHeight: 1.1; letter-spacing: -0.02em; margin-bottom: 1.5rem; color: #111827; }
+
+        @media (max-width: 900px) {
+          .grid-experience, .grid-skills { grid-template-columns: 1fr; gap: 2rem; }
+        }
+
         @media (max-width: 700px) {
-          .hero-name { font-size: 2.75rem !important; }
-          .two-col { flex-direction: column !important; }
+          .hero-name { font-size: 2.5rem !important; line-height: 1.2 !important; }
+          .grid-stats { grid-template-columns: 1fr; gap: 0.75rem; margin-top: 3rem; }
           .nav-desktop { display: none !important; }
           .hamburger { display: flex !important; }
           .form-grid { grid-template-columns: 1fr !important; }
+          
+          /* Add comfortable padding down sizes */
+          section { padding: 4rem 1.25rem !important; }
+          nav { padding: 1rem 1.25rem !important; }
         }
+        
         @media (min-width: 701px) { .hamburger { display: none !important; } .mobile-menu { display: none !important; } }
       `}</style>
 
@@ -230,7 +246,7 @@ export default function Portfolio() {
         <button className="btn-flat btn-flat-dark nav-desktop" style={{ padding: "6px 14px", fontSize: "0.75rem" }}
           onClick={() => scrollTo("contact")}>Contact</button>
         <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}
-          style={{ background: "none", border: "none", cursor: "pointer", display: "flex", flexDirection: "column", gap: 5 }}>
+          style={{ background: "none", border: "none", cursor: "pointer", display: "none", flexDirection: "column", gap: 5 }}>
           {[0, 1, 2].map((i) => (
             <span key={i} style={{
               display: "block", width: 20, height: 2, background: "#111827", borderRadius: 99, transition: "all 0.2s",
@@ -243,8 +259,8 @@ export default function Portfolio() {
       {/* MOBILE MENU */}
       {menuOpen && (
         <div className="mobile-menu" style={{
-          position: "fixed", top: 58, left: 0, right: 0, zIndex: 99, background: "#ffffff",
-          borderBottom: "1px solid #e5e7eb", padding: "1.5rem 2rem", display: "flex", flexDirection: "column", gap: "1.2rem",
+          position: "fixed", top: 57, left: 0, right: 0, zIndex: 99, background: "#ffffff",
+          borderBottom: "1px solid #e5e7eb", padding: "1.5rem 1.25rem", display: "flex", flexDirection: "column", gap: "1.2rem",
         }}>
           {NAV_ITEMS.map((item) => (
             <span key={item} style={{ fontSize: "1rem", fontWeight: 500, cursor: "pointer", color: "#374151" }}
@@ -254,17 +270,14 @@ export default function Portfolio() {
       )}
 
       {/* HERO */}
-      <section id="about" style={{ minHeight: "90vh", display: "flex", alignItems: "center", padding: "6rem 2rem 4rem", maxWidth: 960, margin: "0 auto" }}>
+      <section id="about" style={{ minHeight: "90vh", display: "flex", alignItems: "center", padding: "7.5rem 2rem 4rem", maxWidth: 960, margin: "0 auto" }}>
         <div style={{ width: "100%", opacity: heroVisible ? 1 : 0, transform: heroVisible ? "none" : "translateY(15px)", transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)" }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: "#f3f4f6", padding: "6px 12px", borderRadius: 6, marginBottom: "1.5rem" }}>
+          <div style={{ display: "inline-flex", alignMimeType: "center", gap: "8px", background: "#f3f4f6", padding: "6px 12px", borderRadius: 6, marginBottom: "1.5rem" }}>
             <span style={{ width: 6, height: 6, background: "#10b981", borderRadius: "50%" }} />
             <span style={{ fontSize: "0.75rem", fontWeight: 500, color: "#374151" }}>Available for core engineering roles</span>
           </div>
           
-          <h1 className="hero-name" style={{
-            fontWeight: 700, fontSize: "4rem",
-            lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: "1.5rem", color: "#111827"
-          }}>
+          <h1 className="hero-name">
             Building clean interfaces. Testing performance integrity.
           </h1>
 
@@ -283,9 +296,9 @@ export default function Portfolio() {
             <button className="btn-flat btn-flat-outline" onClick={() => scrollTo("contact")}>Get in Touch</button>
           </div>
 
-          <div className="two-col" style={{ display: "flex", gap: "1rem", marginTop: "4rem", flexWrap: "wrap" }}>
+          <div className="grid-stats">
             {[{ num: "4+", label: "Completed Deployments" }, { num: "3.91", label: "CGPA Track Record" }, { num: "1yr+", label: "QA Production Experience" }].map((s) => (
-              <div key={s.label} style={{ background: "#ffffff", border: "1px solid #e5e7eb", borderRadius: 8, padding: "1rem 1.5rem", flex: "1 1 180px" }}>
+              <div key={s.label} style={{ background: "#ffffff", border: "1px solid #e5e7eb", borderRadius: 8, padding: "1rem 1.5rem" }}>
                 <div style={{ fontSize: "1.5rem", fontWeight: 700, color: "#111827" }}>{s.num}</div>
                 <div style={{ fontSize: "0.75rem", color: "#6b7280", marginTop: 2, fontWeight: 500 }}>{s.label}</div>
               </div>
@@ -299,14 +312,14 @@ export default function Portfolio() {
         <p className="section-label">Professional Timeline</p>
         <h2 style={{ fontSize: "2rem", fontWeight: 700, marginBottom: "3rem", letterSpacing: "-0.01em" }}>Experience &amp; Education</h2>
         
-        <div style={{ display: "flex", gap: "2.5rem", flexWrap: "wrap" }}>
-          <div style={{ flex: "1 1 450px", background: "#ffffff", border: "1px solid #e5e7eb", borderRadius: 12, padding: "2rem" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "0.5rem", marginBottom: "1.5rem" }}>
+        <div className="grid-experience">
+          <div style={{ background: "#ffffff", border: "1px solid #e5e7eb", borderRadius: 12, padding: "2rem" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "0.75rem", marginBottom: "1.5rem" }}>
               <div>
                 <h3 style={{ fontSize: "1.15rem", fontWeight: 600, color: "#111827" }}>Frontend and QA Tester</h3>
                 <p style={{ fontSize: "0.9rem", color: "#4b5563", fontWeight: 500, marginTop: 2 }}>Konga Group</p>
               </div>
-              <div style={{ textAlign: "right" }}>
+              <div style={{ textAlign: "left" }}>
                 <span style={{ fontSize: "0.75rem", fontFamily: "var(--font-mono)", color: "#6b7280", display: "block" }}>July 2024 – Present</span>
                 <span style={{ fontSize: "0.75rem", color: "#9ca3af" }}>Hybrid · Product Team</span>
               </div>
@@ -325,7 +338,7 @@ export default function Portfolio() {
             </ul>
           </div>
 
-          <div style={{ flex: "1 1 300px", display: "flex", flexDirection: "column", gap: "1rem" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             <div style={{ background: "#ffffff", border: "1px solid #e5e7eb", borderRadius: 12, padding: "1.5rem" }}>
               <p className="section-label" style={{ marginBottom: "0.4rem" }}>Academic Track</p>
               <h3 style={{ fontSize: "1.05rem", fontWeight: 600 }}>BSc Computer Science</h3>
@@ -354,7 +367,7 @@ export default function Portfolio() {
         <div style={{ maxWidth: 960, margin: "0 auto" }}>
           <p className="section-label">Selected Track Record</p>
           <h2 style={{ fontSize: "2rem", fontWeight: 700, marginBottom: "3rem", letterSpacing: "-0.01em", color: "#111827" }}>Projects</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "1.5rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(290px, 1fr))", gap: "1.5rem" }}>
             {PROJECTS.map((project, i) => (<ProjectCard key={project.id} project={project} index={i} />))}
           </div>
         </div>
@@ -365,8 +378,8 @@ export default function Portfolio() {
         <p className="section-label">Capabilities</p>
         <h2 style={{ fontSize: "2rem", fontWeight: 700, marginBottom: "3rem", letterSpacing: "-0.01em" }}>Technical Matrix</h2>
         
-        <div className="two-col" style={{ display: "flex", gap: "4rem", flexWrap: "wrap" }}>
-          <div style={{ flex: "1 1 400px" }}>
+        <div className="grid-skills">
+          <div>
             <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
               {SKILLS.map((skill) => (
                 <div key={skill.name}>
@@ -382,7 +395,7 @@ export default function Portfolio() {
             </div>
           </div>
           
-          <div style={{ flex: "1 1 300px" }}>
+          <div>
             <h3 style={{ fontWeight: 600, marginBottom: "1rem", color: "#374151", fontSize: "0.8rem", letterSpacing: "0.05em", textTransform: "uppercase" }}>Operational Frameworks</h3>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginBottom: "2rem" }}>
               {["Agile Testing Scrums", "SDLC Methodologies", "UI/UX Regressions", "Git Version Control", "Attention to Detail", "Time Management"].map((s) => (
@@ -391,7 +404,7 @@ export default function Portfolio() {
             </div>
             
             <h3 style={{ fontWeight: 600, marginBottom: "0.8rem", color: "#374151", fontSize: "0.8rem", letterSpacing: "0.05em", textTransform: "uppercase" }}>Personal Focus</h3>
-            <div style={{ display: "flex", gap: "0.5rem" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
               {["Competitive Swimming", "Financial Markets & Quantitative Trading"].map((interest) => (
                 <span key={interest} style={{ border: "1px solid #e5e7eb", background: "#ffffff", padding: "6px 12px", borderRadius: 6, fontSize: "0.8rem", fontWeight: 500, color: "#4b5563" }}>
                   {interest}
@@ -415,7 +428,7 @@ export default function Portfolio() {
 
           {!formSubmitted ? (
             <div style={{ background: "#ffffff", border: "1px solid #e5e7eb", borderRadius: 12, padding: "2rem" }}>
-              <div className="form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1rem" }}>
+              <div className="form-grid">
                 <div>
                   <label style={labelStyle}>Full Name *</label>
                   <input className="cf-input" style={inputStyle} type="text" placeholder="Jane Smith"
@@ -428,7 +441,7 @@ export default function Portfolio() {
                 </div>
               </div>
 
-              <div className="form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1rem" }}>
+              <div className="form-grid">
                 <div>
                   <label style={labelStyle}>Service Scope *</label>
                   <select className="cf-input" style={inputStyle} value={form.service}
