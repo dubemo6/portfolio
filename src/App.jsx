@@ -506,7 +506,7 @@ export default function Portfolio() {
 
       {/* FOOTER */}
       <footer style={{ background: "#ffffff", borderTop: "1px solid #e5e7eb", color: "#9ca3af", padding: "2rem", textAlign: "center", fontSize: "0.75rem", fontFamily: "var(--font-mono)" }}>
-        <span>© 2026 Oguamanam Anthony · Engineered with clean React</span>
+        <span>© 2024 Oguamanam Anthony </span>
       </footer>
     </div>
   );
